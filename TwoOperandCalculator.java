@@ -139,13 +139,20 @@ public class TwoOperandCalculator extends Application {
 		centerGridTop.add(tfNumber2, 1, 1);
 		
 		// Create array of labels
-		Label[] centerGridTopArray = { LBL_NUMBER_1, LBL_NUMBER_2};
+		Label[] centerGridTopArray = { LBL_NUMBER_1, LBL_NUMBER_2 };
 		
 		// Iterate through array to set font
 		for (int i = 0; i < centerGridTopArray.length; i++) {
-			centerGridTopArray[i].setFont(Font.font("Lucida Console", 12));
+			centerGridTopArray[i].setFont(Font.font("Lucida Console", 14));
 		}
+		
+		// Change the color of the text fields
+		TextField[] textFields = { tfNumber1, tfNumber2, tfCalculation };
 
+		// Iterate through array to set colors
+		for (int i = 0; i < textFields.length; i++) {
+			textFields[i].setStyle("-fx-background-color: #d6a5c2; -fx-border-color: cf80ae;");
+		}
 
 		// Create button grid for center node
 		GridPane buttonGrid = new GridPane();
@@ -167,7 +174,6 @@ public class TwoOperandCalculator extends Application {
 		BT_MULTIPLY.setOnAction(e -> calculate('*'));
 		BT_DIVIDE.setOnAction(e -> calculate('/'));
 		
-		
 		// Create an array of buttons
 		Button[] buttons = { BT_ADD, BT_SUBTRACT, BT_MULTIPLY, BT_DIVIDE };
 
@@ -179,33 +185,31 @@ public class TwoOperandCalculator extends Application {
 			buttons[i].setMinSize(40, 45);
 		}
 
-		// Alignment
+		// Style for tfCalculation node
 		tfCalculation.setEditable(false);
 		tfCalculation.setFont(Font.font("Lucida Console", 12));
 		GridPane.setHalignment(tfCalculation, HPos.CENTER);
 		
-		//
+		// Style for LBL_INSTRUCTION node
 		LBL_INSTRUCTION.setFont(Font.font("Lucida Console", 15));
 		GridPane.setHalignment(LBL_INSTRUCTION, HPos.CENTER);
 
-
-		// Put grids into a VBox
+		// Create outer center node
 		VBox centerVBox = new VBox();
-		centerVBox.setPadding(new Insets(10, 5, 5, 5));
+		
+		// Add children to outer center node
 		centerVBox.getChildren().addAll(centerGridTop, LBL_INSTRUCTION, buttonGrid, tfCalculation);
+		
+		// Align outer center node
+		centerVBox.setPadding(new Insets(10, 5, 5, 5));
 		VBox.setMargin(LBL_INSTRUCTION, new Insets(10, 20, 20, 40));
 		VBox.setMargin(tfCalculation, new Insets(10, 20, 20, 40));
 		VBox.setMargin(centerGridTop, new Insets(20, 20, 20, 40));
 		VBox.setMargin(buttonGrid, new Insets(5, 20, 20, 40));
 		centerVBox.setAlignment(Pos.CENTER);
+		
+		// Set the center node
 		borderPane.setCenter(centerVBox);
-
-		// Change the color of the text fields
-		TextField[] textFields = { tfNumber1, tfNumber2, tfCalculation };
-
-		for (int i = 0; i < textFields.length; i++) {
-			textFields[i].setStyle("-fx-background-color: #d6a5c2; -fx-border-color: cf80ae;");
-		}
 
 		// Create a scene and place it in the stage
 		Scene scene = new Scene(borderPane, 800, 450);
