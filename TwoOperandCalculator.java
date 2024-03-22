@@ -15,142 +15,200 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.scene.layout.GridPane;
-
-/*
- *  The goal of this is to make it look like an old website
- *  Something I would have seen as a kid, at least the style of it
- */
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 
 public class TwoOperandCalculator extends Application {
-	// Data members (would be better in a text file but eh
-	private final Label lblTitle = new Label("Two Operand Calculator");
-	private Label lblInfo = new Label(
-			" Thank you for\n using the " + "Two\n Operand Calculator.\n We know this is\n obviously\n the "
-					+ "application\n you want to use.\n\n A special\n Thank you to\n our sponser:\n"
-					+ " \"Reson To\n Leave Your Man\".\n A New York\n Times Best\n Selling Pamphlet.\n"
-					+ " Buy it on\n Amazon Today.");
-	private Label lblNumber1 = new Label("Enter first number:");
-	private Label lblNumber2 = new Label("Enter second number:");
-	private Label lblInstruction = new Label("Click an operand below to\n\tcalculate");
-	private Label lblcopyrightInfo = new Label("Copyright (c) 2024, Seraphina Morrison. All rights reserved");
-	private Label lblCatPic = new Label(
-			"Here is a picture \nof a cat. \nThere is no \nreason for this. \nShe is just cute. ");
+	// Data members (would be better in a text file but eh)
 	private TextField tfNumber1 = new TextField();
 	private TextField tfNumber2 = new TextField();
 	private TextField tfCalculation = new TextField();
-	private Button btAdd = new Button("+");
-	private Button btSubtract = new Button("-");
-	private Button btMultiply = new Button("*");
-	private Button btDivide = new Button("/");
+	private final Button BT_ADD = new Button("+");
+	private final Button BT_SUBTRACT = new Button("-");
+	private final Button BT_MULTIPLY = new Button("*");
+	private final Button BT_DIVIDE = new Button("/");
+	private final Label LBL_TITLE = new Label("Two Operand Calculator");
+	private final Label LBL_INFO = new Label("Thank you for\nusing the "
+			+ "Two\nOperand Calculator.\nWe know this is\nobviously\nthe " 
+			+ "application\nyou want to use.\n\n");
+	private final Label LBL_SPONSOR = new Label("A special\nThank you to\nour sponser:\n"
+			+ "\"Reson To\nLeave Your Man\"\nA New York\nTimes Best\nSelling Novel.\n"
+			+ "Find it at your\nlocal unsuspecting\nwhiteboard today.");
+	private final Label LBL_NUMBER_1 = new Label("Enter first number:");
+	private final Label LBL_NUMBER_2 = new Label("Enter second number:");
+	private final Label LBL_INSTRUCTION = new Label("Click an operand below to calculate");
+	private final Label LBL_COPYRIGHT_INFO = new Label("Copyright (c) 2024, Seraphina Morrison. All rights reserved");
+	private final Label LBL_CAT_PIC = new Label(
+			"Here is a picture\nof a cat.\nThere is no\nreason for this.\nShe is just cute.");
 
 	// Start method
 	@Override
 	public void start(Stage primaryStage) {
-		// Change the color of the text feilds
-		TextField[] textFields = { tfNumber1, tfNumber2, tfCalculation };
-
-		for (int i = 0; i < textFields.length; i++) {
-			textFields[i].setStyle("-fx-background-color: #d6a5c2; -fx-border-color: cf80ae;");
-		}
 		// Create border pane and style it
 		BorderPane borderPane = new BorderPane();
-		borderPane.setStyle("-fx-background-color: #eda4cf; -fx-border-color: black;");
+		borderPane.setStyle("-fx-background-color: #eda4cf; -fx-border-color: #d6298e;");
 
-		// Set the top and style it
-		lblTitle.setFont(Font.font("Lucida Console", 15));
-		borderPane.setTop(lblTitle);
-		BorderPane.setAlignment(lblTitle, Pos.CENTER);
+		// Create HBox for top node
+		HBox topHBox = new HBox();
 
-		// Set the right and style it
+		// Sets the font and the alignment of label for top node
+		LBL_TITLE.setFont(Font.font("Lucida Console", 30));
+		BorderPane.setAlignment(LBL_TITLE, Pos.CENTER);
+
+		// Create and style image of cat for top node
+		String topUrl = "https://i.pinimg.com/564x/dd/33/d7/dd33d7691b8e734aab844d4f311cd10e.jpg";
+		ImageView topImageView = new ImageView();
+		topImageView.setFitHeight(30);
+		topImageView.setFitWidth(30);
+		topImageView.setImage(new Image(topUrl));
+		BorderPane.setAlignment(topImageView, Pos.CENTER);
+		
+		// Compose and style top HBox
+		topHBox.setPadding(new Insets(5, 5, 5, 5));
+		topHBox.getChildren().addAll(topImageView, LBL_TITLE);
+		HBox.setMargin(LBL_TITLE, new Insets(10, 10, 0, 10));
+		HBox.setMargin(topImageView, new Insets(10, 10, 0, 10));
+		topHBox.setAlignment(Pos.CENTER);
+		
+		// Set top node
+		borderPane.setTop(topHBox);
+
+		// Create VBox for right node
 		VBox rightVBox = new VBox();
 
-		lblCatPic.setFont(Font.font("Lucida Console", 12));
-		BorderPane.setAlignment(lblCatPic, Pos.CENTER);
+		// Sets the font and alignment of label for right node
+		LBL_CAT_PIC.setFont(Font.font("Lucida Console", 12));
+		BorderPane.setAlignment(LBL_CAT_PIC, Pos.CENTER);
 
-		String url = "https://stickerly.pstatic.net/sticker_pack/VWr1nyZRjbPjfUbkTY3K6g/QH4RTN/2/fb9bfa5f-227b-4f05-933f-a606def64619.png";
-		ImageView imageView = new ImageView();
-		imageView.setFitHeight(100);
-		imageView.setFitWidth(100);
-		imageView.setImage(new Image(url));
-		
+		// Create and style image of cat for right node
+		String rightUrl = "https://stickerly.pstatic.net/sticker_pack/VWr1nyZRjbPjfUbkTY3K6g/QH4RTN/2/fb9bfa5f-227b-4f05-933f-a606def64619.png";
+		ImageView rightImageView = new ImageView();
+		rightImageView.setFitHeight(115);
+		rightImageView.setFitWidth(115);
+		rightImageView.setImage(new Image(rightUrl));
+		BorderPane.setAlignment(rightImageView, Pos.CENTER);
+
+		// Compose and style right VBox
 		rightVBox.setPadding(new Insets(15, 5, 5, 5));
-		rightVBox.getChildren().addAll(lblCatPic, imageView);
-		VBox.setMargin(lblCatPic, new Insets(20, 20, 20, 40));
-		VBox.setMargin(imageView, new Insets(20, 20, 20, 40));
+		rightVBox.getChildren().addAll(LBL_CAT_PIC, rightImageView);
+		VBox.setMargin(LBL_CAT_PIC, new Insets(20, 20, 20, 40));
+		VBox.setMargin(rightImageView, new Insets(20, 20, 20, 40));
 		rightVBox.setAlignment(Pos.CENTER);
+
+		// Sets right node
 		borderPane.setRight(rightVBox);
 
-		/*
-		 * I really wanna set a cute pic of a cat here in a v box w a label above that
-		 * says something dumb
-		 */
+		// Style the bottom
+		LBL_COPYRIGHT_INFO.setFont(Font.font("Lucida Console", 8));
+		BorderPane.setAlignment(LBL_COPYRIGHT_INFO, Pos.CENTER);
 
-		// Set the bottom and style it
-		lblcopyrightInfo.setFont(Font.font("Lucida Console", 8));
-		borderPane.setBottom(lblcopyrightInfo);
-		BorderPane.setAlignment(lblcopyrightInfo, Pos.CENTER);
+		// Sets bottom node
+		borderPane.setBottom(LBL_COPYRIGHT_INFO);
 
-		// Set the left and style it
-		lblInfo.setFont(Font.font("Lucida Console", 12));
-		borderPane.setLeft(lblInfo);
-		BorderPane.setAlignment(lblInfo, Pos.CENTER);
+		// Create VBox
+		VBox leftVBox = new VBox();
 
-		// CENTER
-		// Create grid for entering input
-		GridPane gridPane1 = new GridPane();
-		gridPane1.setHgap(7);
-		gridPane1.setVgap(5);
-		gridPane1.add(lblNumber1, 0, 0);
-		lblNumber1.setFont(Font.font("Lucida Console", 10));
-		gridPane1.add(tfNumber1, 1, 0);
-		gridPane1.add(lblNumber2, 0, 1);
-		lblNumber2.setFont(Font.font("Lucida Console", 10));
-		gridPane1.add(tfNumber2, 1, 1);
-		gridPane1.add(lblInstruction, 0, 2);
-		lblInstruction.setFont(Font.font("Lucida Console", 10));
+		// Style the left labels
+		LBL_INFO.setFont(Font.font("Lucida Console", 12));
+		BorderPane.setAlignment(LBL_INFO, Pos.CENTER);
+		LBL_SPONSOR.setFont(Font.font("Lucida Console", 12));
+		BorderPane.setAlignment(LBL_SPONSOR, Pos.CENTER);
 
-		// Grid of buttons
-		GridPane gridPane2 = new GridPane();
-		gridPane2.setHgap(5);
-		gridPane2.setVgap(5);
-		gridPane2.add(btAdd, 0, 0);
-		btAdd.setOnAction(e -> calculate('+'));
-		gridPane2.add(btSubtract, 0, 1);
-		btSubtract.setOnAction(e -> calculate('-'));
-		gridPane2.add(btMultiply, 1, 0);
-		btMultiply.setOnAction(e -> calculate('*'));
-		gridPane2.add(btDivide, 1, 1);
-		btDivide.setOnAction(e -> calculate('/'));
-		gridPane2.add(tfCalculation, 4, 1);
+		// Compose and style left vBox
+		leftVBox.setPadding(new Insets(5, 5, 5, 5));
+		leftVBox.getChildren().addAll(LBL_INFO, LBL_SPONSOR);
+		VBox.setMargin(LBL_INFO, new Insets(20, 20, 20, 20));
+		VBox.setMargin(LBL_SPONSOR, new Insets(20, 20, 20, 20));
+		leftVBox.setAlignment(Pos.CENTER);
 
+		// Sets left node
+		borderPane.setLeft(leftVBox);
+
+		// Create top grid pane for center node
+		GridPane centerGridTop = new GridPane();
+		
+		// Alignment top grid pane for center node
+		centerGridTop.setHgap(7);
+		centerGridTop.setVgap(5);
+		centerGridTop.setAlignment(Pos.CENTER);
+		
+		// Populate grid
+		centerGridTop.add(LBL_NUMBER_1, 0, 0);
+		centerGridTop.add(tfNumber1, 1, 0);
+		centerGridTop.add(LBL_NUMBER_2, 0, 1);
+		centerGridTop.add(tfNumber2, 1, 1);
+		
+		// Create array of labels
+		Label[] centerGridTopArray = { LBL_NUMBER_1, LBL_NUMBER_2};
+		
+		// Iterate through array to set font
+		for (int i = 0; i < centerGridTopArray.length; i++) {
+			centerGridTopArray[i].setFont(Font.font("Lucida Console", 12));
+		}
+
+
+		// Create button grid for center node
+		GridPane buttonGrid = new GridPane();
+		
+		// Align button grid
+		buttonGrid.setHgap(5);
+		buttonGrid.setVgap(5);
+		buttonGrid.setAlignment(Pos.CENTER);
+		
+		// Add buttons to grid
+		buttonGrid.add(BT_ADD, 0, 0);
+		buttonGrid.add(BT_SUBTRACT, 0, 1);
+		buttonGrid.add(BT_MULTIPLY, 1, 0);
+		buttonGrid.add(BT_DIVIDE, 1, 1);
+		
+		// Event handling for buttons
+		BT_ADD.setOnAction(e -> calculate('+'));
+		BT_SUBTRACT.setOnAction(e -> calculate('-'));
+		BT_MULTIPLY.setOnAction(e -> calculate('*'));
+		BT_DIVIDE.setOnAction(e -> calculate('/'));
+		
+		
 		// Create an array of buttons
-		Button[] buttons = { btAdd, btSubtract, btMultiply, btDivide };
+		Button[] buttons = { BT_ADD, BT_SUBTRACT, BT_MULTIPLY, BT_DIVIDE };
 
 		// Iteration to style buttons
 		for (int i = 0; i < buttons.length; i++) {
 			buttons[i].setStyle(
 					"-fx-border-color: #d6298e; " + "-fx-border-width: 1.5px;" + "-fx-background-color: #cf80ae;");
 			buttons[i].setFont(Font.font("Lucida Console", 15));
-			buttons[i].setMinSize(30, 35);
+			buttons[i].setMinSize(40, 45);
 		}
 
 		// Alignment
-		gridPane1.setAlignment(Pos.CENTER);
-		gridPane2.setAlignment(Pos.CENTER);
 		tfCalculation.setEditable(false);
+		tfCalculation.setFont(Font.font("Lucida Console", 12));
 		GridPane.setHalignment(tfCalculation, HPos.CENTER);
+		
+		//
+		LBL_INSTRUCTION.setFont(Font.font("Lucida Console", 15));
+		GridPane.setHalignment(LBL_INSTRUCTION, HPos.CENTER);
+
 
 		// Put grids into a VBox
 		VBox centerVBox = new VBox();
-		centerVBox.setPadding(new Insets(15, 5, 5, 5));
-		centerVBox.getChildren().addAll(gridPane1, gridPane2);
-		VBox.setMargin(gridPane1, new Insets(20, 20, 20, 40));
-		VBox.setMargin(gridPane2, new Insets(20, 20, 20, 40));
+		centerVBox.setPadding(new Insets(10, 5, 5, 5));
+		centerVBox.getChildren().addAll(centerGridTop, LBL_INSTRUCTION, buttonGrid, tfCalculation);
+		VBox.setMargin(LBL_INSTRUCTION, new Insets(10, 20, 20, 40));
+		VBox.setMargin(tfCalculation, new Insets(10, 20, 20, 40));
+		VBox.setMargin(centerGridTop, new Insets(20, 20, 20, 40));
+		VBox.setMargin(buttonGrid, new Insets(5, 20, 20, 40));
 		centerVBox.setAlignment(Pos.CENTER);
 		borderPane.setCenter(centerVBox);
 
+		// Change the color of the text fields
+		TextField[] textFields = { tfNumber1, tfNumber2, tfCalculation };
+
+		for (int i = 0; i < textFields.length; i++) {
+			textFields[i].setStyle("-fx-background-color: #d6a5c2; -fx-border-color: cf80ae;");
+		}
+
 		// Create a scene and place it in the stage
-		Scene scene = new Scene(borderPane, 750, 400);
+		Scene scene = new Scene(borderPane, 800, 450);
 		primaryStage.setTitle("TwoOperandCalculator.exe"); // Set title
 		primaryStage.setScene(scene); // Place the scene in the stage
 		primaryStage.show(); // Display the stage
